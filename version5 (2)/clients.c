@@ -31,6 +31,9 @@ int main(int argc,char *argv[]){
 
     fd_set readfds; char input[BUFFER_SIZE]; unsigned char buffer[BUFFER_SIZE];
     while(1){
+         printf("> ");
+        fgets(input, BUFFER_SIZE, stdin);
+        input[strcspn(input, "\n")] = 0;
         
         FD_ZERO(&readfds); FD_SET(STDIN_FILENO,&readfds); FD_SET(sock,&readfds); int maxfd=sock;
         if(select(maxfd+1,&readfds,NULL,NULL,NULL)<0){ perror("select"); continue;}
